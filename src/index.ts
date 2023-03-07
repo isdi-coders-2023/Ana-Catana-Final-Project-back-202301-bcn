@@ -12,7 +12,7 @@ try {
   await connectDatabase(mongoDdUrl);
   debug("Connected to data base");
 
-  await startServer(Number(port));
+  await startServer(+port);
   debug(`Server listening on port ${port}`);
 } catch (error) {
   debug(error.message);
