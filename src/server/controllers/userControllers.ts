@@ -1,7 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import CustomError from "../../CustomError/CustomError.js";
 import { type CustomJwtPayload, type UserStructure } from "./types.js";
 import User from "../../models/User.js";
 
