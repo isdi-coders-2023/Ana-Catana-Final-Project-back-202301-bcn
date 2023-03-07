@@ -1,10 +1,10 @@
 import { type NextFunction, type Request, type Response } from "express";
 import bcrypt from "bcryptjs";
-import CustomError from "../../CustomError/CustomError";
-import { type UserStructure } from "./types";
+import CustomError from "../../CustomError/CustomError.js";
+import { type UserStructure } from "./types.js";
 import User from "../../models/User.js";
 
-export const createUser = async (
+export const registerUser = async (
   req: Request<Record<string, unknown>, Record<string, unknown>, UserStructure>,
   res: Response,
   next: NextFunction
