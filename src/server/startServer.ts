@@ -2,7 +2,7 @@ import createDebug from "debug";
 import app from "./index.js";
 import type CustomError from "../CustomError/CustomError.js";
 
-const debug = createDebug("server");
+const debug = createDebug("jobtrail:server");
 
 const startServer = async (port: number) =>
   new Promise((resolve, reject) => {
