@@ -10,5 +10,8 @@ module.exports = {
     "!src/react-app-env.d.ts",
     "!src/setupTests.ts",
     "!src/server/index.ts",
+    "!src/server/startServer.ts",
+    "!src/loadEnviroments.ts",
+    "!src/database/connectDatabase.ts",
   ],
 };
