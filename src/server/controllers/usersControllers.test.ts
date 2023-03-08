@@ -1,45 +1,28 @@
 import mongoose from "mongoose";
 import { type Response, type Request, type NextFunction } from "express";
-import { MongoMemoryServer } from "mongodb-memory-server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../../models/User";
+import { type CustomRequest } from "../../types";
 import { type UserLoginCredentials } from "./types.js";
 import { loginUser } from "./userControllers";
 import CustomError from "../../CustomError/CustomError";
-import connectDatabase from "../../database/connectDatabase";
-
-let server: MongoMemoryServer;
-
-beforeAll(async () => {
-  server = await MongoMemoryServer.create();
-  await connectDatabase(server.getUri());
-});
-
-afterAll(async () => {
-  await server.stop();
-  await mongoose.connection.close();
-});
 
 const mockedUserCredentials: UserLoginCredentials = {
   email: "alina@gmail.com",
   password: "12345678",
 };
 
-const request = {} as Request<
-  Record<string, unknown>,
-  Record<string, unknown>,
-  UserLoginCredentials
->;
+const request: Partial<Request> = {};
 
 request.body = mockedUserCredentials;
 
-const response = {
+const response: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
   json: jest.fn(),
-} as Partial<Response>;
+};
 
-const next = jest.fn() as NextFunction;
+const next: Partial<NextFunction> = jest.fn();
 
 describe("Given a POST 'users/login' endpoint", () => {
   describe("When it receives a login request with email 'alina@gmail.com' and password '12345678'", () => {
@@ -61,7 +44,11 @@ describe("Given a POST 'users/login' endpoint", () => {
       bcrypt.compare = jest.fn().mockResolvedValue(mockedPasswordCompareResult);
       jwt.sign = jest.fn().mockReturnValue(expectedToken.token);
 
-      await loginUser(request, response as Response, next);
+      await loginUser(
+        request as CustomRequest,
+        response as Response,
+        next as NextFunction
+      );
 
       expect(response.status).toHaveBeenCalledWith(expectedStatusCode);
       expect(response.json).toHaveBeenCalledWith(expectedToken);
@@ -80,7 +67,35 @@ describe("Given a POST 'users/login' endpoint", () => {
         exec: jest.fn().mockResolvedValue(undefined),
       }));
 
-      await loginUser(request, response as Response, next);
+      await loginUser(
+        request as CustomRequest,
+        response as Response,
+        next as NextFunction
+      );
+
+      expect(next).toBeCalledWith(expectedError);
+    });
+  });
+
+  describe("When it receives a request with an email alina@gmail.com and a password that doesn't match", () => {
+    test("Then it should call its next method with a status code 401 and a message of 'Wrong user credentials'", async () => {
+      const expectedError = new CustomError(
+        "Wrong user credentials",
+        401,
+        "Wrong user credentials"
+      );
+
+      User.findOne = jest.fn().mockImplementationOnce(() => ({
+        exec: jest.fn().mockResolvedValue({ ...mockedUserCredentials }),
+      }));
+
+      bcrypt.compare = jest.fn().mockResolvedValue(false);
+
+      await loginUser(
+        request as CustomRequest,
+        response as Response,
+        next as NextFunction
+      );
 
       expect(next).toBeCalledWith(expectedError);
     });

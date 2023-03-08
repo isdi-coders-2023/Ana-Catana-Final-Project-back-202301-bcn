@@ -29,7 +29,7 @@ afterAll(async () => {
 });
 
 afterEach(async () => {
-  await User.create();
+  await User.deleteMany();
 });
 
 describe("Given a POST 'user/login' endpoint", () => {

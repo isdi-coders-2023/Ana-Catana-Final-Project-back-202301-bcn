@@ -19,10 +19,18 @@ export const loginUser = async (
   try {
     const user = await User.findOne({ email }).exec();
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    if (!user) {
       const error = new CustomError("User not found", 401, "User not found");
-      next(error);
-      return;
+      throw error;
+    }
+
+    if (!(await bcrypt.compare(password, user.password))) {
+      const error = new CustomError(
+        "Wrong user credentials",
+        401,
+        "Wrong user credentials"
+      );
+      throw error;
     }
 
     const jsonWebTokenPayload: CustomJwtPayload = {
