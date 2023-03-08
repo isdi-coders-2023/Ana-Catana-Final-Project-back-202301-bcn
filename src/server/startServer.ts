@@ -1,3 +1,4 @@
+import "./loadEnviroments.js";
 import createDebug from "debug";
 import app from "./index.js";
 import type CustomError from "../CustomError/CustomError.js";
