@@ -1,7 +1,7 @@
-import "../../../loadEnviroments.js";
+import "../../loadEnviroments.js";
 import createDebug from "debug";
 import { type Request, type Response, type NextFunction } from "express";
-import CustomError from "../../../CustomError/CustomError.js";
+import CustomError from "../../CustomError/CustomError.js";
 
 const debug = createDebug("jobtrail:errorMiddlewares");
 

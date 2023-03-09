@@ -6,7 +6,7 @@ import userRouter from "./routers/userRouter.js";
 import {
   generalError,
   notFoundError,
-} from "./controllers/middlewares/errorMiddlewares.js";
+} from "../middlewares/errorMiddlewares/errorMiddlewares.js";
 
 const app = express();
 
