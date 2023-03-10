@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import CustomError from "../../CustomError/CustomError";
+import CustomError from "../../../CustomError/CustomError";
 import { generalError, notFoundError } from "./errorMiddlewares";
 
 const response: Partial<Response> = {
@@ -47,7 +47,7 @@ describe("Given a generalError middleware", () => {
   });
 
   describe("When it receives an error without status code or message", () => {
-    test("then it should call its status method with a code '500' and its json method with 'Something went wrong'", () => {
+    test("Then it should call its status method with a code '500' and its json method with 'Something went wrong'", () => {
       const error = new CustomError("", 0, "");
       const expectedStatusCode = 500;
       const expectedErrorMessage = { error: "Something went wrong" };

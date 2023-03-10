@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import app from "..";
 import { type UserStructure } from "../controllers/types.js";
-import User from "../../models/User.js";
+import User from "../../database/models/User.js";
 import connectDatabase from "../../database/connectDatabase.js";
 
 const mockedUser: UserStructure = {

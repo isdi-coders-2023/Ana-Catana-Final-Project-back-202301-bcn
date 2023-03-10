@@ -5,7 +5,7 @@ import connectDatabase from "./database/connectDatabase.js";
 
 export const debug = createDebug("users:*");
 
-const port = process.env.PORT ?? 4000;
+const port = process.env.PORT ?? 4001;
 const mongoDdUrl = process.env.MONGODB_CONNECTION_URL!;
 
 try {

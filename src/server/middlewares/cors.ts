@@ -1,6 +1,7 @@
+import "../../loadEnviroments.js";
 import type cors from "cors";
 
-const allowedOrigin = ["http://localhost:4000"];
+const allowedOrigin = [process.env.LOCAL_SERVER!, process.env.LOCAL_CLIENT!];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigin,
