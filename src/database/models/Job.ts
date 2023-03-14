@@ -12,7 +12,7 @@ const jobSchema = new Schema({
   },
 
   salary: {
-    type: Number,
+    type: String,
     required: true,
   },
 

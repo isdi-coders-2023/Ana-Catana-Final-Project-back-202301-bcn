@@ -7,6 +7,7 @@ import {
   generalError,
   notFoundError,
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
+import jobRouter from "./routers/jobRouter/jobRouter.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors(options));
 
 app.use("/users", userRouter);
+app.use("/jobs", jobRouter);
 
 app.use(notFoundError);
 app.use(generalError);
