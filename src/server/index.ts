@@ -2,7 +2,7 @@ import morgan from "morgan";
 import express from "express";
 import cors from "cors";
 import options from "./middlewares/cors.js";
-import userRouter from "./routers/userRouter.js";
+import userRouter from "./routers/userRouter/userRouter.js";
 import {
   generalError,
   notFoundError,
