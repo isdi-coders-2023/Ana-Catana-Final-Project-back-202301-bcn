@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import createDebug from "debug";
 
-const debug = createDebug("database");
+const debug = createDebug("jobtrail:database");
 
 const connectDatabase = async (url: string) => {
   mongoose.set("strictQuery", false);

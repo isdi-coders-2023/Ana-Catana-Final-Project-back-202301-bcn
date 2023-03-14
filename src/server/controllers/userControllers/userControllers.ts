@@ -2,8 +2,8 @@ import { type NextFunction, type Request, type Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { type UserLoginCredentials, type CustomJwtPayload } from "./types.js";
-import User from "../../database/models/User.js";
-import CustomError from "../../CustomError/CustomError.js";
+import User from "../../../database/models/User.js";
+import CustomError from "../../../CustomError/CustomError.js";
 
 export const loginUser = async (
   req: Request<
@@ -34,8 +34,8 @@ export const loginUser = async (
     }
 
     const jsonWebTokenPayload: CustomJwtPayload = {
+      name: user.name,
       sub: user._id.toString(),
-      email: user.email,
     };
 
     const token = jwt.sign(jsonWebTokenPayload, process.env.JWT_SECRET!, {
