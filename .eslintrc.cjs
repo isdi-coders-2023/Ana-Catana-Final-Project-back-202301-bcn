@@ -11,7 +11,7 @@ module.exports = {
       files: ["*.ts", "*.tsx"],
     },
     {
-      files: ["src/**/models/**/*.ts", "src/server/routers/usersRouters.ts"],
+      files: ["src/**/models/**/*.ts"],
       rules: { "@typescript-eslint/naming-convention": "off" },
     },
     {

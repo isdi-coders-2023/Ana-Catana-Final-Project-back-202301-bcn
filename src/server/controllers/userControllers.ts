@@ -34,8 +34,8 @@ export const loginUser = async (
     }
 
     const jsonWebTokenPayload: CustomJwtPayload = {
+      name: user.name,
       sub: user._id.toString(),
-      email: user.email,
     };
 
     const token = jwt.sign(jsonWebTokenPayload, process.env.JWT_SECRET!, {

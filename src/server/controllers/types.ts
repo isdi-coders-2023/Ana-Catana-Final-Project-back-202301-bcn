@@ -5,7 +5,7 @@ export interface UserStructure {
   password: string;
 }
 export interface CustomJwtPayload extends JwtPayload {
-  email: string;
+  name: string;
   sub: string;
 }
 
